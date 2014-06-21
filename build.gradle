@@ -1,0 +1,51 @@
+// Apply the java plugin to add support for Java
+apply plugin: 'java'
+apply plugin: 'idea'
+
+// Use Java 7 by default
+sourceCompatibility = '1.7'
+targetCompatibility = '1.7'
+
+// Set our project variables
+project.ext {
+    dropwizardVersion = '0.7.0'
+}
+// In this section you declare where to find the dependencies of your project
+repositories {
+    mavenCentral()
+}
+
+// In this section you declare the dependencies for your production and test code
+dependencies {
+    compile (
+        'io.dropwizard:dropwizard-core:' + dropwizardVersion,
+        'io.dropwizard:dropwizard-testing:' + dropwizardVersion,
+        'org.slf4j:slf4j-api:1.7.5'
+    )
+    testCompile "junit:junit:4.11"
+}
+
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.12'
+}
+
+apply plugin: 'application'
+
+// The main class of the application
+mainClassName = 'com.example.helloworld.HelloWorldApplication'
+
+// Configure the run task to start the Dropwizard service
+run {
+    args 'server', 'hello-world.yml'
+}
+
+test {
+    // show standard out and standard error of the test JVM(s) on the console
+    testLogging {
+        showStandardStreams = true
+        displayGranularity = 2
+        exceptionFormat = 'full'
+        events 'started', 'passed'
+    }
+}
