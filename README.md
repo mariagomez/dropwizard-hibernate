@@ -1,7 +1,7 @@
-dropwizard-gradle
+dropwizard-hibernate
 =================
 
-Setting up a Dropwizard project using Gradle (each commit is a step in the process). It follows the example on [Dropwizard Getting Started Guide](https://dropwizard.github.io/dropwizard/getting-started.html)
+Setting up a Dropwizard project using Hibernate with multiple tables and relationships between them. I took my  [dropwizard-gradle project](https://github.com/mariagomez/dropwizard-gradle) as a starting point.
 
 Steps to run:
 -------
