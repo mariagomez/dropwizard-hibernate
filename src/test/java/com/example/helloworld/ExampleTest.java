@@ -1,5 +1,6 @@
 package com.example.helloworld;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -13,6 +14,7 @@ public class ExampleTest {
     }
 
     @Test
+    @Ignore
     public void shouldFail() {
         assertThat(true, is(false));
     }

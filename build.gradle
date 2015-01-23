@@ -1,6 +1,28 @@
+import com.fasterxml.jackson.dataformat.yaml.snakeyaml.Yaml
+
 // Apply the java plugin to add support for Java
 apply plugin: 'java'
 apply plugin: 'idea'
+apply plugin: 'flyway'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.flywaydb:flyway-gradle-plugin:3.0'
+        classpath 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.3.2'
+    }
+}
+
+flyway {
+    def yamlConfig = new Yaml().load(new File('hello-world.yml').newReader())
+    def dbConfig = yamlConfig.database
+
+    user = dbConfig.user
+    password = dbConfig.password
+    url = dbConfig.url
+}
 
 // Use Java 7 by default
 sourceCompatibility = '1.7'
@@ -20,9 +42,15 @@ dependencies {
     compile (
         'io.dropwizard:dropwizard-core:' + dropwizardVersion,
         'io.dropwizard:dropwizard-testing:' + dropwizardVersion,
-        'org.slf4j:slf4j-api:1.7.5'
+        'io.dropwizard:dropwizard-hibernate:' + dropwizardVersion,
+        'org.postgresql:postgresql:9.3-1101-jdbc41',
+        'org.slf4j:slf4j-api:1.7.5',
+        'org.flywaydb:flyway-core:3.0'
     )
-    testCompile "junit:junit:4.11"
+    testCompile (
+        'junit:junit:4.11',
+        'org.hamcrest:hamcrest-core:1.3'
+    )
 }
 
 

@@ -18,6 +18,10 @@ database:
     charSet: UTF-8
     hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
     hibernate.show_sql: true
+    org.hibernate.envers.audit_table_suffix: "_HIST"
+    org.hibernate.envers.audit_table_prefix: ""
+    org.hibernate.envers.audit_strategy: org.hibernate.envers.strategy.ValidityAuditStrategy
+
 
   # the maximum amount of time to wait on an empty pool before throwing an exception
   maxWaitForConnection: 1s
